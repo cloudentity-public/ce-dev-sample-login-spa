@@ -1,22 +1,29 @@
 ## About
 
-This is a simple react app to demonostrate authentication of users through any identity providers configured using ACP as identity hub. This app has an OAuth PKCE client to interact with ACP as OAuth authorization server and to fetch the access and idToken token in return. These tokens can be utilized to make further api calls(not in scope of this app) or new tokens can be requested based on the integration pattern.
+This is a simple react app to demonstrate authentication of users through any identity providers configured using ACP as identity hub. 
+
+ACP can be connect to any identity provider using various mechanisms using: https://docs.authorization.cloudentity.com/guides/workspace_admin/connect/
+
+
+This app uses an OAuth client application to interact with ACP as OAuth authorization server using Authorization code grant with PKCE flow, and to fetch the access and idToken token in return. These tokens can be utilized to make further api calls(not in scope of this app) or new tokens can be requested based on the integration pattern.
 
 ## Usage
 
-### To install the required packages
+### 1. Install the required packages
 
 ```yarn install```
 
-This will pull in all required npm packages and also a Cloudentity specific npm package to handle accessTokens(setting within local storage for further usage, silent refresh etc) within the SPA.
+This will pull in all required npm packages(defined in `package.json`), which also  incldues a Cloudentity specific npm package to handle accessTokens(setting within local storage for further usage, silent refresh etc) within the SPA.
 
-https://www.npmjs.com/package/@cloudentity/auth
+* [Cloudentity auth js npm](https://www.npmjs.com/package/@cloudentity/auth)
+* [Cloudentity auth js source reference](https://github.com/cloudentity/cloudentity-auth-js)
 
-Source for Cloudentity auth js for reference: https://github.com/cloudentity/cloudentity-auth-js
+### 2. Configure the app
 
-### Configure the app
+To configure the application to use an ACP instance, navigate to `src/config/authConfig.js` and modify the settings for authConfig to provide appropriate values.
 
-To configure the application to use an ACP instance, navigate to `src/config/authConfig.js` and modify the settings for authConfig to provide appropriate values 
+Make sure you have an [OAuth client application created and configured within ACP](https://docs.authorization.cloudentity.com/guides/developer/protect/application/create_app/) that can be used to populate below parameters.
+ 
 
 ```
 const authConfig = {
@@ -36,6 +43,6 @@ const authConfig = {
 };
 ```
 
-### To run the app
+### Run the app
 
 ```yarn start```
