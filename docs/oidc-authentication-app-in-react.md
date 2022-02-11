@@ -27,12 +27,13 @@ For full instructions, [see this article to register a client application in the
 
 ```bash
 npx create-react-app oidc-auth-sample-app
+cd oidc-auth-sample-app
 ```
 
 We'll install packages required for minimal functionality:
 
 * react-router-dom - client-side routing for react
-* cloudentity/auth - Cloudentity JS sdk to fetch and store OAuth accessTokens
+* cloudentity/auth - Cloudentity JS SDK to fetch and store OAuth accessTokens
 * jwt-decode - decode JWT tokens, such as OAuth access and id tokens
 
 ```bash
@@ -176,14 +177,12 @@ const authConfig = {
  };
 
  export default authConfig;
-
 ```
 
 In `src/auth.js`, we'll create a simple hook to manage our authenticated state:
 
 ```js
 import {useState, useEffect} from 'react';
-import authConfig from '../authConfig';
 
 export const useAuth = (auth) => {
   const [authenticated, setAuthentication] = useState(null);
