@@ -151,6 +151,14 @@ npm start
 
 Navigate to [http://localhost:3000](http://localhost:3000); you'll see the Login view, and if you go directly to [http://localhost:3000/profile](http://localhost:3000/profile), you'll see the Profile view. We have not applied the authorization logic to the routes yet, so let's move to protecting the profile view to be accessible for authorized users.
 
+For the `/` route, you should see something like this (styles will vary depending on browser, as we have not applied any reset stylesheets for this example):
+
+![Sample SPA Login view](oidc-react-spa-1.png)
+
+For the `/profile` route, you should see something like this:
+
+![Sample SPA Profile view without authorization logic](oidc-react-spa-2.png)
+
 Authorized users are represented in this application by the presence of a valid `idToken`
 fetched from an OIDC provider (in this case the Cloudentity authorization platform). In this
 application, if a valid `idToken` is not available, then this application will reach out
@@ -436,6 +444,8 @@ export default Profile;
 ```
 
 Now you should see your username, email (if your logged-in user has one configured), and last login time.
+
+![Sample SPA with complete profile page](oidc-react-spa-3.png)
 
 This is just the beginning; we can use the `accessToken` as well to call protected API endpoints, which we'll be exploring in another article.
 
