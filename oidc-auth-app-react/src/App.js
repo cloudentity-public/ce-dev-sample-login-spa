@@ -1,17 +1,43 @@
-import { BrowserRouter as Router } from 'react-router-dom';
-import { SnackbarProvider } from 'notistack';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from 'react-router-dom';
+import Login from './components/Login';
+import Profile from './components/Profile';
 import './App.css';
-import Routing from './components/Routing'
+
+import CloudentityAuth from '@cloudentity/auth';
+import authConfig from './authConfig';
+import { useAuth } from './auth';
 
 function App() {
+  const cloudentity = new CloudentityAuth(authConfig);
+  const [authenticated] = useAuth(cloudentity);
+
+  function authorize () {
+    cloudentity.authorize();
+  };
+
+  function clearAuth () {
+    cloudentity.revokeAuth()
+      .then(() => {
+        window.location.reload();
+      })
+      .catch(() => {
+        window.location.reload();
+      });
+  };
+
   return (
-    <Router>
-      <SnackbarProvider maxSnack={3}>
-        <div className="App">
-          <Routing />
-        </div>
-      </SnackbarProvider>
-    </Router>
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Login auth={authenticated} handleLogin={authorize} />} />
+          <Route path="profile" element={<Profile auth={authenticated} handleLogout={clearAuth} />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

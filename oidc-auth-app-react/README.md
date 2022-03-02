@@ -1,58 +1,70 @@
-## About
+# Getting Started with Create React App
 
-This is a simple react app to demonstrate authentication of users through any identity providers configured using ACP as identity hub.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-ACP can be connect to any identity provider using various mechanisms using: https://docs.authorization.cloudentity.com/guides/workspace_admin/connect/
+## Available Scripts
 
-This app uses an OAuth client application to interact with ACP as OAuth authorization server using Authorization code grant with PKCE flow, and to fetch the access and idToken token in return. These tokens can be utilized to make further api calls(not in scope of this app) or new tokens can be requested based on the integration pattern.
+In the project directory, you can run:
 
-## Usage
+### `npm start`
 
-### 1. Install the required packages
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-`yarn install`
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-This will pull in all required npm packages(defined in `package.json`), which also incldues a Cloudentity specific npm package to handle accessTokens(setting within local storage for further usage, silent refresh etc) within the SPA.
+### `npm test`
 
-- [Cloudentity auth js npm](https://www.npmjs.com/package/@cloudentity/auth)
-- [Cloudentity auth js source reference](https://github.com/cloudentity/cloudentity-auth-js)
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### 2. Create Application in ACP
+### `npm run build`
 
-1. Login to ACP and go to Applications -> + CREATE APPLICATION
-2. Give the Application a Name (eg Demo SPA)
-3. For Application Type choose: Single-page Application
-4. Select 'Create'
-5. In the overview tab, on the right panel, set a Redirect URI as http://localhost:3000/dashboard
-6. Save Changes
-7. Go to the OAuth Tab and enable Application Type -> Trusted
-8. Go to Scopes Tab, Expand Profile and enable 'Profile' from the list of Scopes
-9. Go back to the overview tab and copy the the 'CLIENT ID' from the right panel. This will be pasted into your config in the next step.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### 3. Configure the app
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-To configure the application to use an ACP instance, navigate to `src/config/authConfig.js` and modify the settings for authConfig to provide appropriate values.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-Make sure you have an [OAuth client application created and configured within ACP](https://docs.authorization.cloudentity.com/guides/developer/protect/application/create_app/) that can be used to populate below parameters.
+### `npm run eject`
 
-```
-const authConfig = {
-   domain: 'your-domain', // e.g. 'example.demo.cloudentity.com.' Recommended; always generates URLs with 'https' protocol.
-    // baseUrl: optional alternative to 'domain.' Protocol required, e.g. 'https://example.demo.cloudentity.com.'
-    // In situations where protocol may dynamically resolve to 'http' rather than 'https' (for example in dev mode), use 'baseUrl' rather than 'domain'.
-    tenantId: 'your-tenant-id',
-    authorizationServerId: 'your-authorization-server-id',
-    clientId: 'your-client-id',
-    redirectUri: 'window.location.href',
-    silentAuthRedirectUri: 'window.location.href' + '/silent', // optional setting to redirect to a different endpoint following successful silent auth flow
-    userInfoUri: 'your-user-info-uri', // optional, for fetching user info via API
-    scopes: ['profile', 'email', 'openid', 'revoke_tokens'], // 'revoke_tokens' scope must be present for 'logout' action to revoke token! Without it, token will only be deleted from browser's local storage.
-    accessTokenName: 'your_org_access_token', // optional; defaults to '{tenantId}_{authorizationServerId}_access_token'
-    idTokenName: 'your_org_access_token', // optional; defaults to '{tenantId}_{authorizationServerId}_id_token'
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-};
-```
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-### Run the app
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-`yarn start`
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
